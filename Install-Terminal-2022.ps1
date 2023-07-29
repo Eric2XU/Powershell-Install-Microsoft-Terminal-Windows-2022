@@ -1,5 +1,5 @@
 ###############################################################
-# Install Windows Terminal on Server 2022
+# Install Windows Terminal on Server 2022 x64
 # Writen for PowerShell Core (remove lines 7-9 for Windows PS)
 ###############################################################
 
@@ -7,6 +7,16 @@
 Install-Module WindowsCompatibility -Force
 Import-Module WindowsCompatibility
 Import-WinModule AppX
+
+#################
+# Pre-Req: Microsoft.VCLibs.x64.14.00.Desktop.appx
+# Download Microsoft.VCLibs.x64.14.00.Desktop.appx
+$DownloadURL = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx"
+$DownloadPath = "$env:USERPROFILE\Downloads\Microsoft.VCLibs.x64.14.00.Desktop.appx"
+Invoke-WebRequest -Uri $DownloadURL -OutFile $DownloadPath
+
+# Install Microsoft.VCLibs.x64.14.00.Desktop.appx
+Add-AppxPackage -Path $DownloadPath
 
 #################
 # Pre-Req: Microsoft.UI.Xaml (note it only works with 2.7 while writing this)
